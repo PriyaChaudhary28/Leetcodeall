@@ -27,10 +27,6 @@ public:
     }
     private:
     int cal(int a,int b){
-        while(b!=0){
-           int s=b;
-        b=a%b;
-        a=s;}
-        return a;
+        return b == 0 ? a : gcd(b, a % b);
 }
 };
