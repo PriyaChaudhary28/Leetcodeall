@@ -1,16 +1,18 @@
 class Solution {
+private:
+    vector<int>res;
+    void ans(int i,int n){
+        if(i>n) return;
+        res.push_back(i);
+        for(int j=0;j<=9;j++){
+        ans(10*i+j,n);
+        }
+}
 public:
     vector<int> lexicalOrder(int n) {
-        vector<string>t;
-        for(int i=1;i<=n;i++){
-            string tm=to_string(i);
-            t.push_back(tm);
+        for(int i=1;i<=9;i++){
+         ans(i,n);
         }
-        vector<int>ans;
-        sort(t.begin(),t.end());
-        for(auto i:t){
-          ans.push_back(stoi(i));
-        }
-        return ans;
+        return res;
     }
 };
