@@ -1,19 +1,27 @@
 class Solution {
 public:
     long long dividePlayers(vector<int>& skill) {
-        sort(skill.begin(),skill.end());
-        int i=0;
-        int j=skill.size()-1;
-        int s=skill[i]+skill[j];
-        long long c=0;
-        while(i<j){
-            int cu=skill[i]+skill[j];
-            if(cu!=s){
-                return -1;
-            }
-            c+=(long long)(skill[i])*(long long)(skill[j]);
- i++; j--;
+        int n=skill.size();
+        vector<int>v(1001,0);
+        int sum=0;
+        for(int &i:skill){
+            sum+=i;
+            v[i]++;
         }
-        return c;
+        int t=n/2;
+        if(sum%t!=0) return -1;
+        
+        int target=sum/t;
+        long long c=0;
+        for(int i=0;i<n;i++){
+        int cu=skill[i];
+        int rem=target-cu;
+        if(v[rem]<=0){
+            return -1;
+        }
+            c+=(long long)cu*(long long)(rem);
+            v[rem]-=1;
+        }
+        return c/2;
     }
 };
