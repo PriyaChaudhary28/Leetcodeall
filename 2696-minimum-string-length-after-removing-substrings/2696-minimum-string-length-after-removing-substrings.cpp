@@ -1,18 +1,13 @@
 class Solution {
 public:
     int minLength(string s) {
-        stack<string>st;
-        for(char i :s){
-            
-            if(!st.empty()&&st.top()=="A" && i=='B'){
-                st.pop();
-            }
-            else if(!st.empty() && st.top()=="C" && i=='D'){
-                st.pop();
-            }else{
-            st.push(string(1, i));
-            }
-}
-        return st.size();
+       int j = -1;
+        for (char c : s){
+            if (j >= 0 && (s[j] == 'A' && c == 'B' || s[j] == 'C' && c == 'D'))
+                j--;
+            else
+                s[++j] = c;
+        }
+        return j + 1;
     }
 };
