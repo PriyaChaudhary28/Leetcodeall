@@ -10,7 +10,7 @@ public:
         while(r<n){
             freq[s[r]-'A']++;
             maxf=max(maxf,freq[s[r]-'A']);
-            while((r-l+1)-maxf>k){
+            if((r-l+1)-maxf>k){
                 freq[s[l]-'A']--;
                 l++;
             }
