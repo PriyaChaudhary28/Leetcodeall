@@ -10,23 +10,20 @@
  * };
  */
 class Solution {
+
+    int dfsh(TreeNode* root){
+        if(root==NULL) return 0;
+        int l=dfsh(root->left);
+        if(l==-1) return -1;
+        int r=dfsh(root->right);
+        if(r==-1) return -1;
+        
+        if(abs(l-r)>1) return -1;
+        return max(l,r)+1;}
 public:
-    int getHeight(TreeNode* root){
-        if(root==nullptr) return 0;
-        
-        int lh=getHeight(root->left);
-        int rh=getHeight(root->right);
-        return max(lh,rh)+1;
-    }
     bool isBalanced(TreeNode* root) {
-        if(root==nullptr) return true;
-        int leftheight=getHeight(root->left);
-        int rightheight=getHeight(root->right);
-        
-        if(abs(leftheight-rightheight)<=1
-          && isBalanced(root->left)&& isBalanced(root->right)){
-            return true;
-        }
-        return false;
+        return dfsh(root)!=-1;
     }
+    
+    
 };
