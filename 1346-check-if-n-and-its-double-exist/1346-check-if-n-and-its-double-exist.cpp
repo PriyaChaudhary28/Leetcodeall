@@ -1,16 +1,30 @@
 class Solution {
 public:
+    int bsearch(vector<int>& arr, int t){
+        int l=0;
+        int r=arr.size()-1;
+        int mid;
+        while(l<=r){
+            mid=l+(r-l)/2;
+            if(arr[mid]==t){
+                return mid;
+            }
+            else if(arr[mid]>t){
+                r=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return -1;
+    }
     bool checkIfExist(vector<int>& arr) {
-        unordered_set<int>s;
         int n=arr.size();
+        sort(arr.begin(),arr.end());
         for(int i=0;i<n;i++){
-            if(s.find(arr[i]*2)!=s.end()){
-                return true;
-            }
-            else if(arr[i]%2==0 && s.find(arr[i]/2)!=s.end()){
-                return true;
-            }
-            s.insert(arr[i]);
+            int j=bsearch(arr,2*arr[i]);
+            if(j!=-1 && j!=i){
+return true;}
         }
         return false;
     }
